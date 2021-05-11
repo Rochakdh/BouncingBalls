@@ -8,7 +8,8 @@ function getDistance(x1,y1,x2,y2){
     var xDist = x2 - x1;
     var yDist = y2 - y1;
     return Math.hypot(xDist, yDist);
-  }
+}
+
 class Circle {
     constructor(x, y, radius, color) {
     this.x = x
@@ -39,7 +40,6 @@ function formRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-
 function randomPositionCircle(){
     var coordinates = {}
     coordinates.x = Math.random() * innerWidth
@@ -48,6 +48,7 @@ function randomPositionCircle(){
     return coordinates
     
 }
+
 function init(){
     circles = []
     for (let i = 0; i < 800; i++ ){
@@ -56,6 +57,16 @@ function init(){
         y = positionCoordinate.y
         var radius = randomNumberFromRange(5,15)
         var color = formRandomColor();
+        if (i !== 0){
+            for (let j=0; j < circles.length; j++){
+                if (getDistance(x,y,circles[j].x,circles[j].y) - radius*2 < 0){
+                    positionCoordinate = randomPositionCircle()
+                    x = positionCoordinate.x
+                    y = positionCoordinate.y
+                    j = -1
+                }
+            }
+        }
         circles.push(new Circle(x,y,radius,color));
     }
     // console.log(circles)   
@@ -66,17 +77,6 @@ function animate() {
     circles.forEach(function(circle){
         circle.draw()
     })
-    // c.clearRect(0, 0, canvas.width, canvas.height);
-    // circle1.draw();
-    // circle2.x = mouse.x
-    // circle2.y = mouse.y
-    // circle2.draw();
-    // if (getDistance(circle1.x,circle1.y,circle2.x,circle2.y)<circle1.radius+circle2.radius){
-    //     circle1.color = 'yellow'
-    // }
-    // else{
-    //     circle1.color = 'black'
-    // }
 }
 init()
 animate()
