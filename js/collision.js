@@ -2,14 +2,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
-let mouse = {
-    x:innerWidth /2,
-    y:innerWidth /2
-}
-addEventListener('mousemove',function(e){
-    mouse.x = e.clientX;
-    mouse.y = e.clientY
-})
+ 
  
 function getDistance(x1,y1,x2,y2){ 
     var xDist = x2 - x1;
@@ -22,9 +15,6 @@ class Circle {
     this.y = y
     this.radius = radius
     this.color = color
-    // this.update = function(){
-    //     this.draw();
-    // }
     };
     draw = function(){
         c.beginPath();
